@@ -1,4 +1,4 @@
-static ALL_DOMAINS: &[&str] = &[
+static DEFAULT_DOMAINS: &[&str] = &[
   "aol.com",
   "gmail.com",
   "google.com",
@@ -13,7 +13,7 @@ static ALL_DOMAINS: &[&str] = &[
   "icloud.com",
 ];
 
-pub fn get_email_suggestions(input: &str) -> Vec<&str> {
+pub fn suggestions(input: &str) -> Vec<&str> {
   let sub_strings: Vec<&str> = input.splitn(2, "@").collect();
 
   if sub_strings.len() < 2 || sub_strings[0].is_empty() {
@@ -21,7 +21,7 @@ pub fn get_email_suggestions(input: &str) -> Vec<&str> {
   }
 
   let domain = sub_strings[1];
-  let matching_domains: Vec<&str> = (*ALL_DOMAINS)
+  let matching_domains: Vec<&str> = (*DEFAULT_DOMAINS)
     .iter()
     .map(|x| *x)
     .filter(|x| x.starts_with(domain))
