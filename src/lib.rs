@@ -13,16 +13,19 @@ static ALL_DOMAINS: &[&str] = &[
   "icloud.com",
 ];
 
-pub fn get_email_suggestions(input: &str) -> &[&str] {
-  let mut result = vec![];
-  for c in input.split("@") {
-    result.push(c);
+pub fn get_email_suggestions(input: &str) -> Vec<&str> {
+  let sub_strings: Vec<&str> = input.splitn(2, "@").collect();
+
+  if sub_strings.len() < 2 || sub_strings[0].is_empty() {
+    return vec![];
   }
-  // If we encountered more than one @-sign, result will have > 2 items.
-  println!("input={}; result={};", input, format!("{:?}", result));
-  if input.contains("@") {
-    ALL_DOMAINS
-  } else {
-    &[]
-  }
+
+  let domain = sub_strings[1];
+  let matching_domains: Vec<&str> = (*ALL_DOMAINS)
+    .iter()
+    .map(|x| *x)
+    .filter(|x| x.starts_with(domain))
+    .collect();
+
+  return matching_domains;
 }
