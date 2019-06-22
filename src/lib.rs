@@ -14,6 +14,10 @@ static DEFAULT_DOMAINS: &[&str] = &[
 ];
 
 pub fn suggestions(input: &str) -> Vec<&str> {
+  return suggestionsn((*DEFAULT_DOMAINS).len(), input);
+}
+
+pub fn suggestionsn(n: usize, input: &str) -> Vec<&str> {
   let sub_strings: Vec<&str> = input.splitn(2, "@").collect();
 
   if sub_strings.len() < 2 || sub_strings[0].is_empty() {
@@ -25,6 +29,7 @@ pub fn suggestions(input: &str) -> Vec<&str> {
     .iter()
     .map(|x| *x)
     .filter(|x| x.starts_with(domain))
+    .take(n)
     .collect();
 
   return matching_domains;
