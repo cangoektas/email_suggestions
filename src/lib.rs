@@ -28,7 +28,8 @@ pub fn suggestions<'a>(
         .unwrap_or(DEFAULT_DOMAINS)
         .iter()
         .filter(move |domain| domain.starts_with(parsed_domain_prefix))
-        .map(|domain| *domain),
+        .map(move |domain| &domain[parsed_domain_prefix.len()..])
+        .filter(|domain| !domain.is_empty()),
     )
   }
   .into_iter()

@@ -47,6 +47,13 @@ fn returns_no_suggestions_for_non_matching_domains() {
 }
 
 #[test]
+fn returns_no_suggestions_when_input_fully_matches_a_domain() {
+  let expected_result: Vec<&str> = vec![];
+  let actual_result: Vec<&str> = suggestions("foo@gmail.com", None).collect();
+  assert_eq!(actual_result, expected_result);
+}
+
+#[test]
 fn returns_default_domains_for_input_ending_with_single_at_sign() {
   let expected_result: Vec<&str> = vec![
     "aol.com",
@@ -68,7 +75,7 @@ fn returns_default_domains_for_input_ending_with_single_at_sign() {
 
 #[test]
 fn returns_matching_domains() {
-  let expected_result: Vec<&str> = vec!["gmail.com", "google.com", "gmx.com"];
+  let expected_result: Vec<&str> = vec!["mail.com", "oogle.com", "mx.com"];
   let actual_result: Vec<&str> = suggestions("foo@g", None).collect();
   assert_eq!(actual_result, expected_result);
 }
@@ -79,17 +86,17 @@ fn results_can_be_limited_with_take() {
   let mut actual_result: Vec<&str>;
 
   actual_result = suggestions("foo@g", None).take(2).collect();
-  expected_result = vec!["gmail.com", "google.com"];
+  expected_result = vec!["mail.com", "oogle.com"];
   assert_eq!(actual_result, expected_result);
 
   actual_result = suggestions("foo@y", None).take(5).collect();
-  expected_result = vec!["yahoo.com", "ymail.com"];
+  expected_result = vec!["ahoo.com", "mail.com"];
   assert_eq!(actual_result, expected_result);
 }
 
 #[test]
 fn supports_custom_list_of_domains() {
-  let expected_result: Vec<&str> = vec!["bar.com", "baz.com"];;
+  let expected_result: Vec<&str> = vec!["ar.com", "az.com"];;
   let actual_result: Vec<&str> = suggestions(
     "foo@b",
     Some(&["hello.com", "world.com", "bar.com", "baz.com"]),
