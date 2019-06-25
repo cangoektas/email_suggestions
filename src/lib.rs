@@ -1,3 +1,7 @@
+mod email_suggestion;
+
+pub use email_suggestion::EmailSuggestion;
+
 static DEFAULT_DOMAINS: &'static [&'static str] = &[
   "aol.com",
   "gmail.com",
@@ -12,21 +16,6 @@ static DEFAULT_DOMAINS: &'static [&'static str] = &[
   "gmx.com",
   "icloud.com",
 ];
-
-#[derive(PartialEq, Eq, Debug)]
-pub struct EmailSuggestion {
-  pub complete_address: String,
-  pub text_to_append: String,
-}
-
-impl EmailSuggestion {
-  pub fn new(complete_address: String, text_to_append: String) -> EmailSuggestion {
-    EmailSuggestion {
-      complete_address,
-      text_to_append,
-    }
-  }
-}
 
 pub fn suggestions<'a>(
   input: &'a str,
