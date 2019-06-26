@@ -27,9 +27,9 @@ pub fn suggestions<'a>(
     None
   } else {
     let parsed_domain_prefix: &'a str = sub_strings[1];
-    let domains: &'a [&'a str] = domains.unwrap_or(DEFAULT_DOMAINS);
     Some(
       domains
+        .unwrap_or(DEFAULT_DOMAINS)
         .iter()
         .filter(move |domain| {
           parsed_domain_prefix.len() < domain.len() && domain.starts_with(parsed_domain_prefix)
