@@ -1,0 +1,16 @@
+[package]
+name = "email_suggestions_wasm"
+version = "0.1.0"
+authors = ["Can Göktas <can.goektas@gmail.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+email_suggestions = { path = "../email_suggestions" }
+serde = { version = "1.0.93", features = ["derive"] }
+
+[dependencies.wasm-bindgen]
+version = "0.2.47"
+features = ["serde-serialize"]

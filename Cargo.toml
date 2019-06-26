@@ -1,7 +1,6 @@
-[package]
-name = "email_suggestions"
-version = "0.1.0"
-authors = ["Can Göktas <can.goektas@gmail.com>"]
-edition = "2018"
+[workspace]
 
-[dependencies]
+members = [
+    "email_suggestions",
+    "email_suggestions_wasm"
+]

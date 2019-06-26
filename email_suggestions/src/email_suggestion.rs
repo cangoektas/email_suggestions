@@ -1,4 +1,6 @@
-#[derive(PartialEq, Eq, Debug)]
+use serde::{Deserialize, Serialize};
+
+#[derive(PartialEq, Eq, Debug, Deserialize, Serialize)]
 pub struct EmailSuggestion {
   pub complete_address: String,
   pub text_to_append: String,
